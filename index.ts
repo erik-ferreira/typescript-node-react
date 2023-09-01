@@ -1,10 +1,38 @@
-type Usuario = {
-  name: string
-  anoDeNascimento: number
+type Address = {
+  street: string
+  number: number
 }
 
-function calculaIdadeDoUsuario(usuario: Usuario) {
-  return 2023 - usuario.anoDeNascimento
+type User = {
+  name?: string
+  age: number
+  address: Address
 }
 
-calculaIdadeDoUsuario({ name: "Erik", anoDeNascimento: 2002 })
+type UserProperties = keyof User
+
+function pickProperty(user: User, property: UserProperties) {
+  return user[property]
+}
+
+const userDefault: User = {
+  name: "Erik",
+  age: 21,
+  address: {
+    street: "Rua 1",
+    number: 123,
+  },
+}
+
+console.log(pickProperty(userDefault, "name"))
+
+const video = {
+  title: "s",
+  duration: 100,
+}
+
+type Video = keyof typeof video
+
+// Utility Types
+
+type PickPropertyReturnType = ReturnType<typeof pickProperty>
